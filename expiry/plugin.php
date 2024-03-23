@@ -876,7 +876,12 @@ function expiry_router($keyword, $result, $postx) {
 						yourls_die('This short URL has expired.', 'Link Expired', '403');
 					}
 				default:
-					yourls_die('This short URL has expired.', 'Link Expired', '403');
+					if ( defined('EXPIRY_DEFAULT_FALLBACK') ) {
+						yourls_redirect( EXPIRY_DEFAULT_FALLBACK, 302);
+						die();
+					} else {
+						yourls_die('This short URL has expired.', 'Link Expired', '403');
+					}
 			}
 		}
 	}
