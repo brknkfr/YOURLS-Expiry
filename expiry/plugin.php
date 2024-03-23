@@ -856,7 +856,10 @@ function expiry_router($keyword, $result, $postx) {
 
 	elseif( $postx == null || $postx == '' || $postx == 'none' ) {
 	
-		yourls_delete_link_by_keyword( $keyword );
+		$delete_expired = defined('EXPIRY_DELETE_EXPIRED') && EXPIRY_DELETE_EXPIRED === false ? false : true;
+		if ( $delete_expired ) {
+			yourls_delete_link_by_keyword( $keyword );
+		}
 		
 		if ( !yourls_is_API() && !defined('EXPIRY_CLI')) {
 		
