@@ -879,7 +879,7 @@ function expiry_router($keyword, $result, $postx) {
 						yourls_die('This short URL has expired.', 'Link Expired', '403');
 					}
 				default:
-					if ( defined('EXPIRY_DEFAULT_FALLBACK') {
+					if ( defined('EXPIRY_DEFAULT_FALLBACK') ) {
 						yourls_redirect( EXPIRY_DEFAULT_FALLBACK, 302);
 						die();
 					} else {
@@ -963,7 +963,7 @@ function expiry_stats_response( $infos ) {
 yourls_add_filter( 'add_new_link', function ( $return, $url , $keyword, $title ) { 
 
 	// this method tolelrates no error in short url creation
-	if( isset ( $return['status'] ) &&  $return['status'] === 'fail' ) {
+	if(isset ( $return['code'] ) ) {
 		switch( $return['code'] ) {
 			case 'error:url':
 				$return['expiry'] = 'Error: use "action => expiry" to add expiration data to a pre-esxisting url. No expiry data set';
