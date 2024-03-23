@@ -856,7 +856,10 @@ function expiry_router($keyword, $result, $postx) {
 
 	elseif( $postx == null || $postx == '' || $postx == 'none' ) {
 	
-		yourls_delete_link_by_keyword( $keyword );
+		$delete_expired = defined('DELETE_EXPIRED_LINKS') && DELETE_EXPIRED_LINKS === false ? false : true;
+		if ( $delete_expired ) {
+			yourls_delete_link_by_keyword( $keyword );
+		}
 		
 		if ( !yourls_is_API() && !defined('EXPIRY_CLI')) {
 		
@@ -1325,7 +1328,7 @@ yourls_add_action( 'activated_expiry/plugin.php', function () {
 	// Create the expiry table
 	$table = YOURLS_DB_PREFIX . 'expiry';
 	$table_expiry  = "CREATE TABLE IF NOT EXISTS `".$table."` (";
-	$table_expiry .= "keyword binary(100) NOT NULL, ";
+	$table_expiry .= "keyword varchar(200) NOT NULL, ";
 	$table_expiry .= "type varchar(5) NOT NULL, ";
 	$table_expiry .= "click varchar(5), ";
 	$table_expiry .= "timestamp varchar(20), ";
