@@ -11,6 +11,7 @@ As any YOURLS plugin:
 ##### Notes:
 - The databse ought to create itself, if not, there is an sql file in the `expiry/assets` folder, make sure to add your database prefix where necessary.
 - If upgrading from 2.1.x of this plugin to 2.2.x, set `define( 'EXPIRY_DB_UPDATE', true );` in `config.php` __for one page load__ in order to update the database, otherwise this plugin will not work. 
+- If you don't want the expired links to be deleted and to kept in database, set `define( 'EXPIRY_DELETE_EXPIRED', false );` in `config.php`.
 ##### What's Working:
 -  add per-link and/or global time based or click count limited links
 -  update links already in database to have expiration conditions
